@@ -1,8 +1,135 @@
-*{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
 }
 
-body{
-    overflow: hidden;
+:not(:defined) > * {
+  display: none;
+}
+
+model-viewer {
+  overflow-x: hidden;
+  position: realtive;
+  height: 450px;
+  transform: rotate(360deg);
+}
+.icon {
+  height: 45px;
+  width: 45px;
+  fill: #4285f4;
+}
+#ar-button {
+  background-color: transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  bottom: 0px;
+  padding: 0px 20px 0px 20px;
+  font-family: Roboto Regular, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #4285f4;
+  height: 40px;
+  line-height: 36px;
+  border-radius: 18px;
+  border: 1px solid #dadce0;
+  display: inline-flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+#ar-button:active {
+  background-color: #e8eaed;
+}
+#ar-button:hover {
+  background-color: #f1f1f1;
+}
+
+#ar-button:focus {
+  outline: none;
+}
+
+#ar-button:focus-visible {
+  outline: 1px solid #4285f4;
+}
+
+@keyframes circle {
+  from {
+    transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+@keyframes elongate {
+  from {
+    transform: translateX(100px);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+model-viewer > #ar-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 175px;
+  animation: elongate 2s infinite ease-in-out alternate;
+  display: none;
+}
+
+model-viewer[ar-status="session-started"] > #ar-prompt {
+  display: block;
+}
+
+model-viewer > #ar-prompt > img {
+  animation: circle 4s linear infinite;
+}
+
+model-viewer > #ar-failure {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 175px;
+  display: none;
+}
+
+model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+label {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#setColor {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+#setColor::-webkit-color-swatch {
+  border-radius: 15px;
+  border: 3px solid #2d2d2d;
+}
+#setColor::-moz-color-swatch {
+  border-radius: 15px;
+  border: 3px solid #2d2d2d;
 }

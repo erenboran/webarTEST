@@ -1,18 +1,23 @@
 {
-  "name": "3d-world-master",
-  "version": "1.0.0",
-  "description": "1. Clone this repository on your system",
-  "main": "app.js",
+  "name": "webxr",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "devDependencies": {
+    "vite": "^3.1.0"
+  },
   "dependencies": {
-    "express": "^4.18.1",
-    "nodemon": "^2.0.19",
-    "three": "^0.143.0"
+    "@google/model-viewer": "^2.0.2",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "babylonjs": "^5.25.0",
+    "fullscreen-polyfill": "^1.0.4",
+    "intersection-observer": "^0.12.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "three": "^0.144.0"
   }
 }

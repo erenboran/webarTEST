@@ -1,27 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <link rel="Aesthetics icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Three.js AR</title>
-    <link rel="stylesheet" href="./style.css" />
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "./build/three.module.js",
-          "three/examples/libs/status.module": "./jsm/libs/stats.module.js",
-          "three/examples/controls/OrbitControls": "./jsm/controls/OrbitControls.js",
-          "three/examples/loaders/FBXLoader": "./jsm/loaders/FBXLoader.js",
-          "three/examples/loaders/TGALoader": "./jsm/loaders/TGALoader.js",
-          "three/examples/webxr/VRButton": "./jsm/webxr/VRButton.js",
-          "three/examples/geometries/BoxLineGeometry": "./jsm/geometries/BoxLineGeometry.js"
-        }
-      }
-    </script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/resize-observer-polyfill@1.5.1/dist/ResizeObserver.js"></script>
+    <title>Aesthetics Space</title>
   </head>
   <body>
-    <script type="module" src="./client.js"></script>
+    <model-viewer
+      id="model"
+      camera-controls
+      touch-action="pan-y"
+      src="https://model-viewer-ar-xwsb.vercel.app/scene.glb"
+      shadowintensity="1"
+      ios-src="https://model-viewer-ar-xwsb.vercel.app/ios-scene.usdc"
+      ar
+      alt="3D picture frame"
+      placement="wall"
+    >
+      <button slot="ar-button" id="ar-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewbox="0 0 700 700"
+          class="icon"
+        >
+          <path
+            fillrule="evenodd"
+            d="M409.5 275.33v64.719l-52.445 28.07v-64.656zm-119 0l52.434 28.098v64.688l-52.434-28.07zm59.5-40.051l51.719 28.23L350 291.212l-51.73-27.703zm-.105-38.766c-3.891.04-7.04 3.242-6.97 7.168v19.383l-62.901 34.316c-2.266 1.27-3.66 3.633-3.66 6.184v76.453l-94.758 50.91c-3.692 1.687-5.184 6.16-3.278 9.757 1.953 3.59 6.489 4.828 9.957 2.653l95.145-51.07 63.223 33.832c2.07 1.136 4.606 1.136 6.715 0l63.223-33.832 95.148 51.07c3.434 2.18 8.008.933 9.95-2.653 1.917-3.601.421-8.07-3.305-9.757l-94.758-50.91.003-76.453c0-2.551-1.398-4.922-3.632-6.184l-62.938-34.316v-19.383c.066-3.988-3.176-7.223-7.164-7.168z"
+          ></path>
+          <path
+            fillrule="evenodd"
+            d="M185.46 186.31h329.06c17.172 0 30.465 12.867 30.465 28.617v176.66c0 15.754-13.289 28.578-30.465 28.578l-329.06-.004c-17.148 0-30.434-12.824-30.434-28.578v-176.65c.004-15.75 13.285-28.617 30.434-28.617zm164.43-70.777a7.031 7.031 0 00-6.969 7.156v49.523l-157.46-.004c-24.34 0-44.527 18.988-44.527 42.711v176.66c0 6.746 1.656 13.09 4.563 18.734l-38.785 20.867c-3.766 1.656-5.313 6.16-3.371 9.781a7.011 7.011 0 0010.004 2.594l40.648-21.809c8.093 7.742 19.246 12.512 31.465 12.512h329.06c12.215 0 23.395-4.773 31.504-12.512l40.602 21.81c3.464 2.234 8.109 1.038 10.012-2.595 1.949-3.628.421-8.132-3.34-9.78l-38.79-20.872c2.888-5.636 4.567-11.988 4.567-18.734v-176.64c0-23.719-20.19-42.71-44.559-42.71h-157.46V122.7a7.041 7.041 0 00-7.164-7.16z"
+          ></path>
+          <path
+            d="M180.11 269.83c-3.914.031-7.063 3.242-7 7.16v52.535c0 9.422 14.16 9.422 14.16 0V276.99c.07-3.988-3.2-7.23-7.16-7.16z"
+          ></path>
+          <path
+            fillrule="evenodd"
+            d="M501.4 294.59c4.86-2.79 10.789-1.168 13.609 3.66 2.79 4.86 1.23 10.863-3.598 13.645-4.82 2.758-10.828 1.125-13.645-3.695-2.824-4.863-1.195-10.824 3.633-13.61zm-7.066-12.223c-11.441 6.613-15.395 21.418-8.782 32.859 6.61 11.441 21.48 15.457 32.922 8.84 11.441-6.578 15.363-21.418 8.754-32.86-6.613-11.425-21.422-15.413-32.895-8.839z"
+          ></path>
+        </svg>
+        View in your space
+      </button>
+      <div class="container">
+        <label for="setColor">Select Color</label>
+        <input type="color" id="setColor" />
+      </div>
+      <button id="ar-failure">AR is not tracking!</button>
+    </model-viewer>
+    <script
+      async
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+    <script type="module">
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      let value = params.id;
+
+      const modelViewerTexture = document.querySelector("model-viewer#model");
+      modelViewerTexture.addEventListener("load", async () => {
+        const material = modelViewerTexture.model.materials[0];
+        const texture = await modelViewerTexture.createTexture(value);
+        material.pbrMetallicRoughness["baseColorTexture"].setTexture(texture);
+      });
+
+      const colorChange = document.getElementById("setColor");
+      colorChange.addEventListener("input", (e) => {
+        const material2 = modelViewerTexture.model.materials[1];
+        material2.pbrMetallicRoughness.setBaseColorFactor(e.target.value);
+      });
+    </script>
   </body>
 </html>
