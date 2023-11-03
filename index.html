@@ -15,7 +15,7 @@
       id="model"
       camera-controls
       touch-action="pan-y"
-      src="https://model-viewer-ar-xwsb.vercel.app/scene.glb"
+      src="scene.glb"
       shadowintensity="1"
       ios-src="https://model-viewer-ar-xwsb.vercel.app/ios-scene.usdc"
       ar
@@ -66,19 +66,7 @@
         get: (searchParams, prop) => searchParams.get(prop),
       });
       let value = params.id;
-
-      const modelViewerTexture = document.querySelector("model-viewer#model");
-      modelViewerTexture.addEventListener("load", async () => {
-        const material = modelViewerTexture.model.materials[0];
-        const texture = await modelViewerTexture.createTexture(value);
-        material.pbrMetallicRoughness["baseColorTexture"].setTexture(texture);
-      });
-
-      const colorChange = document.getElementById("setColor");
-      colorChange.addEventListener("input", (e) => {
-        const material2 = modelViewerTexture.model.materials[1];
-        material2.pbrMetallicRoughness.setBaseColorFactor(e.target.value);
-      });
+      
     </script>
   </body>
 </html>
