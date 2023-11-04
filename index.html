@@ -15,12 +15,16 @@
       id="model"
       camera-controls
       touch-action="pan-y"
+      autoplay
+      animation-name="Trot"
       src="scene.glb"
+      texture-zebra="Zebra.png" 
       shadowintensity="1"
       ios-src="https://model-viewer-ar-xwsb.vercel.app/ios-scene.usdc"
       ar
       alt="3D picture frame"
       placement="wall"
+
     >
       <button slot="ar-button" id="ar-button">
         <svg
@@ -46,10 +50,6 @@
         </svg>
         View in your space
       </button>
-      <div class="container">
-        <label for="setColor">Select Color</label>
-        <input type="color" id="setColor" />
-      </div>
       <button id="ar-failure">AR is not tracking!</button>
     </model-viewer>
     <script
@@ -62,11 +62,12 @@
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
     ></script>
     <script type="module">
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      let value = params.id;
-      
+      const modelViewerTexture = document.querySelector("model-viewer#model");
+      modelViewerTexture.addEventListener("load", async () => {
+        const material = modelViewerTexture.model.materials[0];
+        const texture = await modelViewerTexture.createTexture("Zebra.png"); // Doğru dosya yolunu burada belirtin
+        material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+      });    
     </script>
   </body>
 </html>
